@@ -7,6 +7,20 @@ interface PopuplayoutProps {
 }
 
 export const PopupLayout: FC<PopuplayoutProps> = ({ children, popupstate, changePopupState }) => {
+  useEffect(() => {
+    if(popupstate){
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          changePopupState();
+        }
+      };
+      document.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+
+  }, [popupstate]);
   if (popupstate) {
     return (
       <div
