@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 interface PopuplayoutProps {
   children: React.ReactNode
@@ -7,14 +7,17 @@ interface PopuplayoutProps {
 }
 
 export const PopupLayout: FC<PopuplayoutProps> = ({ children, popupstate, changePopupState }) => {
-
   if (popupstate) {
     return (
       <div
         className="flex items-center justify-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full bg-[#0000007a]"
-        onClick={() => console.log('asdfaa')}
+        onClick={(e) => {
+          if (e.currentTarget === e.target) {
+            changePopupState();
+          }
+        }}
       >
-        <div className="relative p-4 w-full max-w-lg h-full md:h-auto">
+        <div className="relative p-4 w-full max-w-lg h-full md:h-auto ">
           <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 md:p-8">
             <button
               className="absolute top-0 right-0  h-12 w-12 rounded-full shadow flex justify-center items-center bg-white"
