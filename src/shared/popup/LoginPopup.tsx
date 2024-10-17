@@ -1,10 +1,17 @@
+import { FC } from "react"
 import { BlueButton } from "../ui/elements/BlueBurron"
 import { InputField } from "../ui/form/InputField"
 import { PopupLayout } from "../ui/layout/PopupLayout"
 
-export const LoginPopup = () => {
+interface LoginPopupProps{
+  popupState:boolean,
+  changePopupState:()=>void
+}
+export const LoginPopup:FC<LoginPopupProps> = ({popupState,changePopupState}) => {
     return (
-        <PopupLayout>
+        <PopupLayout
+        popupstate={popupState}
+        changePopupState={changePopupState}>
             <h3 className="mb-3 text-2xl font-bold text-gray-900 dark:text-white text-center">
               Форма входа
             </h3>

@@ -1,8 +1,24 @@
 import { useState } from "react"
 import { LoginPopup } from "./popup/LoginPopup"
+import { BlueButton } from "./ui/elements/BlueBurron"
 
 export const Header = () => {
   const [loginPopupState, setLoginPopupState]= useState(false)
+  const [loginState, setLoginState] = useState( false);
+
+
+
+
+  const loginButton =()=>{
+    setLoginState(false)
+   
+  }
+  const logOutButton =()=>{
+    setLoginState(true)
+     setLoginPopupState(true);
+
+  }
+
     return (
         <nav className="bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
         <div className="flex flex-wrap justify-between items-center">
@@ -19,10 +35,25 @@ export const Header = () => {
 
           </div>
           <div className="flex items-center lg:order-2">
+            {!loginState && (
+              <BlueButton
+              onClick={logOutButton}
+              title="LogIn"
+              />
+            )}
+            {loginState && (
+              <BlueButton
+              onClick={loginButton}
+              title="LogOut"
+              />
+            )}
 
           </div>
         </div>
-          <LoginPopup/>
+          <LoginPopup
+            popupState={loginPopupState}
+            changePopupState={()=>setLoginPopupState(!loginPopupState)}
+            />
       </nav>
 
     )

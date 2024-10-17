@@ -2,24 +2,20 @@ import { FC, useState } from "react";
 
 interface PopuplayoutProps {
   children: React.ReactNode
-
+  popupstate:boolean,
+  changePopupState:()=>void
 }
 
-export const PopupLayout: FC<PopuplayoutProps> = ({ children }) => {
-  const [visibility, setVisibility] = useState(true)
+export const PopupLayout: FC<PopuplayoutProps> = ({ children,popupstate,changePopupState }) => {
 
-  const popupState = () => {
-    setVisibility(!visibility)
-    console.log('here')
-  }
-  if (visibility) {
+  if (popupstate) {
     return (
       <div className="flex items-center justify-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full bg-[#0000007a]">
         <div className="relative p-4 w-full max-w-lg h-full md:h-auto">
           <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 md:p-8">
             <button
               className="absolute -top-5 -right-5 h-12 w-12 rounded-full shadow flex justify-center items-center bg-white"
-              onClick={popupState}
+              onClick={()=>changePopupState()}
             >
                         <svg
                             className=" h-7 w78"
