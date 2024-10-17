@@ -14,7 +14,7 @@ export const PopupLayout: FC<PopuplayoutProps> = ({ children,popupstate,changePo
         <div className="relative p-4 w-full max-w-lg h-full md:h-auto">
           <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 md:p-8">
             <button
-              className="absolute -top-5 -right-5 h-12 w-12 rounded-full shadow flex justify-center items-center bg-white"
+              className="absolute top-0 right-0  h-12 w-12 rounded-full shadow flex justify-center items-center bg-white"
               onClick={()=>changePopupState()}
             >
                         <svg
