@@ -1,15 +1,16 @@
 import { FC } from "react"
 
-interface inputProps {
+interface InputProps {
     title: string;
     placeholder:string;
     type?: string;
     name:string;
-    onChange?:(event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange:(event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const InputField:FC<inputProps> = ({title, placeholder, type = 'text', name, onChange}) => {
-    <div className="mb-5">
+export const InputField:FC<InputProps> = ({title, placeholder, type = 'text', name, onChange}) => {
+    return (
+        <div className="">
         <label>
             <span className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> {title}</span>
             <input
@@ -23,4 +24,5 @@ export const InputField:FC<inputProps> = ({title, placeholder, type = 'text', na
 
 
   </div>
+    )
 }
