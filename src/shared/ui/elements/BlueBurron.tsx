@@ -1,12 +1,12 @@
 import { FC } from "react"
 
-interface buttonProps{
+interface buttonProps {
     title: string,
     type?: "button" | "submit" | "reset",
-    onClick?:()=>void
+    onClick?: () => void
 }
 
-export const BlueButton:FC<buttonProps> = ({title,type,onClick}) => {
+export const BlueButton: FC<buttonProps> = ({ title, type, onClick }) => {
     return (
         <button
             type={type}

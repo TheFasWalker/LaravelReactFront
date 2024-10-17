@@ -2,23 +2,26 @@ import { FC, useState } from "react";
 
 interface PopuplayoutProps {
   children: React.ReactNode
-  popupstate:boolean,
-  changePopupState:()=>void
+  popupstate: boolean,
+  changePopupState: () => void
 }
 
-export const PopupLayout: FC<PopuplayoutProps> = ({ children,popupstate,changePopupState }) => {
+export const PopupLayout: FC<PopuplayoutProps> = ({ children, popupstate, changePopupState }) => {
 
   if (popupstate) {
     return (
-      <div className="flex items-center justify-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full bg-[#0000007a]">
+      <div
+        className="flex items-center justify-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full bg-[#0000007a]"
+        onClick={() => console.log('asdfaa')}
+      >
         <div className="relative p-4 w-full max-w-lg h-full md:h-auto">
           <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 md:p-8">
             <button
               className="absolute top-0 right-0  h-12 w-12 rounded-full shadow flex justify-center items-center bg-white"
-              onClick={()=>changePopupState()}
+              onClick={() => changePopupState()}
             >
-                        <svg
-                            className=" h-7 w78"
+              <svg
+                className=" h-7 w78"
                 fill="#000000"
                 viewBox="0 0 512 512"
 
@@ -34,7 +37,7 @@ export const PopupLayout: FC<PopuplayoutProps> = ({ children,popupstate,changePo
               </svg>
             </button>
             <div className="mb-4 text-sm font-light text-gray-500 dark:text-gray-400">
-  {children}
+              {children}
             </div>
           </div>
         </div>
