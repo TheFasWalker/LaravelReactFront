@@ -39,6 +39,7 @@ function App() {
                   <Toggler
                     name="toggler"
                     title="Toggler"
+                    value={true}
                   />
                 </form>
               </div>
