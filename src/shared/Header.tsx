@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { LoginPopup } from "./popup/LoginPopup"
 import { BlueButton } from "./ui/elements/BlueBurron"
+import { NavLink } from "react-router-dom"
 
 export const Header = () => {
   const [loginPopupState, setLoginPopupState] = useState(false)
@@ -57,7 +58,7 @@ export const Header = () => {
                   </div>
                   <ul className="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
                     <li>
-                      <a href="#" className="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">My profile</a>
+                      <NavLink to={'/user'} className="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">My profile</NavLink>
                     </li>
                     <li>
                       <a href="#" className="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Account settings</a>

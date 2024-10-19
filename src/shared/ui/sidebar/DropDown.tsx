@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 type LinksData = {
     name: string;
@@ -57,12 +58,12 @@ export const DropDown: FC<DropDownProps> = ({ title, linksData }) => {
                 <ul className="py-2 space-y-2">
                     {linksData.map((item, index) => (
                         <li key={index}>
-                            <a
-                                href={item.link}
+                            <NavLink
+                                to={item.link}
                                 className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                             >
                                 {item.name}
-                            </a>
+                            </NavLink>
                         </li>
                     ))}
                 </ul>
