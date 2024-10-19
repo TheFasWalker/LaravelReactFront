@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { LoginPopup } from "./popup/LoginPopup"
-import { BlueButton } from "./ui/elements/BlueBurron"
+import { LoginPopup } from "../popup/LoginPopup"
+import { BlueButton } from "../ui/elements/BlueBurron"
 import { NavLink } from "react-router-dom"
 
 export const Header = () => {
-  const [loginPopupState, setLoginPopupState] = useState(false)
+
   const [loginState, setLoginState] = useState(false);
   const [userDataPopup, setUserDataPopup] = useState(false)
 
@@ -18,7 +18,6 @@ export const Header = () => {
   }
   const logOutButton = () => {
     setLoginState(true)
-    setLoginPopupState(true);
 
   }
 
@@ -38,16 +37,9 @@ export const Header = () => {
 
         </div>
         <div className="flex items-center lg:order-2">
-          {!loginState && (
-            <BlueButton
-              onClick={logOutButton}
-              title="LogIn"
-            />
-          )}
-          {loginState && (
             <div className=" relative">
               <div
-                className=" h-10 w-10 bg-slate-500 rounded-full"
+                className=" h-10 w-10 bg-slate-500 rounded-full cursor-pointer"
                 onClick={() => toggleUserPopupData()}
               ></div>
               {userDataPopup && (
@@ -101,15 +93,9 @@ export const Header = () => {
 
 
             </div>
-
-          )}
-
         </div>
       </div>
-      <LoginPopup
-        popupState={loginPopupState}
-        changePopupState={() => setLoginPopupState(!loginPopupState)}
-      />
+
     </nav>
 
   )

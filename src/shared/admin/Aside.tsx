@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import { DropDown } from "./ui/sidebar/DropDown"
+import { DropDown } from "../ui/sidebar/DropDown"
 
 export const Aside = () => {
   return (

@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
-import { Aside } from "../../Aside";
-import { Header } from "../../Header";
+import { Aside } from "../../admin/Aside";
+import { Header } from "../../admin/Header";
 import { Outlet } from "react-router-dom";
 
 export const AdminLayout: FC= () => {
