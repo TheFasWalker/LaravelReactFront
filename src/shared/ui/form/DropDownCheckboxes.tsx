@@ -62,8 +62,8 @@ export const DropDownCheckboxes: FC<DropDownCheckboxesInterface> = ({
           !dropDownState && "hidden"
         }`}
       >
-        {data.map((data) => (
-          <li className="flex items-center cursor-pointer">
+        {data.map((data,index) => (
+          <li className="flex items-center cursor-pointer" key={index}>
             <label className=" flex flex-row gap-2 cursor-pointer">
               <input
                 name={data.name}
