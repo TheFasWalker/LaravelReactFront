@@ -8,6 +8,7 @@ import { Users } from "../pages/Admin/Users";
 import { AdminLayout } from "../shared/ui/layout/AdminLayout";
 import { Login } from "../pages/Admin/Login";
 import { HomePage } from "../pages/HomePage";
+import { ErrorPage } from "../pages/ErroPage";
 
 
 
@@ -26,6 +27,8 @@ function App() {
     </Route>
     <Route path="/" element={<HomePage/>}/>
     <Route path="/login" element={<Login/>}/>
+    <Route path='/error' element={<ErrorPage/>}/>
+
     </Routes>
   </BrowserRouter>
 
