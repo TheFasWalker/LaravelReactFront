@@ -1,5 +1,7 @@
 import { BlueButton } from "../shared/ui/elements/BlueBurron";
-import { DropDownCheckboxes } from "../shared/ui/elements/DropDownCheckboxes";
+import { DropDownCheckboxes } from "../shared/ui/form/DropDownCheckboxes";
+import { Toggler } from "../shared/ui/form/Toggler";
+
 import { Mainlayout } from "../shared/ui/layout/MainLayoyt";
 
 function App() {
@@ -34,6 +36,10 @@ function App() {
                       placeholder="Search"
                     />
                   </div>
+                  <Toggler
+                    name="toggler"
+                    title="Toggler"
+                  />
                 </form>
               </div>
               <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
