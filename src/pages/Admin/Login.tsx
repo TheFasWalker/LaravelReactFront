@@ -7,6 +7,40 @@ import { LoaderResult } from "../../shared/ui/elements/LoaderResult"
 
 export const Login =()=>{
     const [loading, setLoading] = useState(false)
+    const [formData, setFormData] = useState({ email: "", password: "" });
+    const [error, setError] = useState("");
+    
+    const handleChange = (e: { target: { name: string; value: string } }) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+    const submit = async (e: React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault();
+        setLoading(true)
+        setError("");
+        try {
+            const response = await fetch ('http://localhost:80/api/sanctum/auth',{
+                method:"POST",
+                headers:{
+                    'Content-Type':"application/json",
+                },
+                body: JSON.stringify(formData)
+            })
+            console.log(response)
+            if(!response.ok){
+                throw new Error('Loging Error')
+            }
+            const data = await response.json();
+            const token = data.token;
+            localStorage.setItem("bearer_token", token);
+            console.log("Token received:", token);
+        }catch (error){
+            setError(error.message)
+        }finally {
+            setLoading(false);
+        }
+        
+    }
     return(
     <div className=" flex items-center justify-center h-[100vh] w-[100vw] flex-col">
             <Loader
@@ -15,19 +49,21 @@ export const Login =()=>{
                 <h3 className="mb-3 text-2xl font-bold text-gray-900 dark:text-white text-center">
                     Форма входа
                 </h3>
-                <form action="#" className="flex flex-col  gap-3 w-64">
+                {error && <p className="text-red-500">{error}</p>} 
+                <form action="#" className="flex flex-col  gap-3 w-64" onSubmit={submit}>
                     <InputField
                         title="Ваш email"
                         type="email"
                         name="email"
                         placeholder="Ваш email"
-                        onChange={() => console.log()} />
+                        onChange={handleChange} />
                     <InputField
                         title="Ваш Пароль"
                         type="password"
                         name="password"
                         placeholder="*********"
-                        onChange={() => console.log()} />
+                        onChange={handleChange} />
+                    <input type="text" value='tel' name="device_name" />
                     <BlueButton title="Войти" />
                 </form>
             </div>
