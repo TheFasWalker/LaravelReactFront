@@ -3,7 +3,7 @@ import { Aside } from "../../Aside";
 import { Header } from "../../Header";
 import { Outlet } from "react-router-dom";
 
-export const Mainlayout: FC= () => {
+export const AdminLayout: FC= () => {
   return (
     <div className="antialiased bg-gray-50 dark:bg-gray-900">
       <Header />

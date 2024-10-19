@@ -1,4 +1,3 @@
-import { Mainlayout } from "../shared/ui/layout/MainLayoyt"
 
 export const UserData =()=>{
 return(

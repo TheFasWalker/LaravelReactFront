@@ -1,7 +1,6 @@
-import { BlueButton } from "../shared/ui/elements/BlueBurron"
-import { DropDownCheckboxes } from "../shared/ui/form/DropDownCheckboxes"
-import { Toggler } from "../shared/ui/form/Toggler"
-import { Mainlayout } from "../shared/ui/layout/MainLayoyt"
+import { BlueButton } from "../../shared/ui/elements/BlueBurron"
+import { DropDownCheckboxes } from "../../shared/ui/form/DropDownCheckboxes"
+import { Toggler } from "../../shared/ui/form/Toggler"
 
 export const Categories =()=>{
 return(
