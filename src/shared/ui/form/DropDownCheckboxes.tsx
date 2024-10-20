@@ -58,7 +58,7 @@ export const DropDownCheckboxes: FC<DropDownCheckboxesInterface> = ({
         {title}
       </button>
       <ul
-        className={`absolute top-full right-0 left-0 p-3 bg-white flex flex-col gap-3 overflow-x-auto max-h-28 ${
+        className={`z-10 absolute top-full right-0 left-0 p-3 bg-white flex flex-col gap-3 overflow-x-auto max-h-28 ${
           !dropDownState && "hidden"
         }`}
       >
