@@ -5,10 +5,11 @@ interface InputProps {
     placeholder:string;
     type?: string;
     name:string;
+    value?:string;
     onChange:(event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const InputField:FC<InputProps> = ({title, placeholder, type = 'text', name, onChange}) => {
+export const InputField:FC<InputProps> = ({title, placeholder,value='', type = 'text', name, onChange}) => {
     return (
         <div className="">
         <label>
@@ -17,6 +18,7 @@ export const InputField:FC<InputProps> = ({title, placeholder, type = 'text', na
                 type={type}
                 name={name}
                 onChange={onChange}
+                value={value}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder={placeholder}
                  />

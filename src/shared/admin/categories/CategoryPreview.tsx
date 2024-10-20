@@ -3,20 +3,20 @@ import { FC, useState, useEffect, useRef } from "react";
 interface PreviewInterface {
     name: string;
     id: string;
+    onClick?:()=>void;
 }
 
-export const CategoryPreview: FC<PreviewInterface> = ({ name, id }) => {
+export const CategoryPreview: FC<PreviewInterface> = ({ name, id , onClick}) => {
     const [dropDownState, setDropDownState] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    // Function to handle clicks outside the dropdown
+
     const handleClickOutside = (event: MouseEvent) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
             setDropDownState(false);
         }
     };
 
-    // Effect to add/remove event listener for clicks outside
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
@@ -51,26 +51,26 @@ export const CategoryPreview: FC<PreviewInterface> = ({ name, id }) => {
                 </button>
                 {dropDownState && (
                     <div
-                        ref={dropdownRef} // Attach the ref to the dropdown
+                        ref={dropdownRef} 
                         className="z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute"
                     >
                         <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
                             <li>
-                                <a
-                                    href="#"
-                                    className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                <button
+                                data-id={id}
+                                  onClick={onClick}
+                                    className=" w-full text-left block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                 >
                                     Edit
-                                </a>
+                                </button>
                             </li>
                         </ul>
                         <div className="py-1">
-                            <a
-                                href="#"
-                                className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                            <button
+                                className=" w-full text-left block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                             >
                                 Delete
-                            </a>
+                            </button>
                         </div>
                     </div>
                 )}

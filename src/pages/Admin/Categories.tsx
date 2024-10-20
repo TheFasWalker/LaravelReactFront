@@ -1,5 +1,11 @@
+import { useState } from "react"
 import { CategoryPreview } from "../../shared/admin/categories/CategoryPreview"
 import { BlueButton } from "../../shared/ui/elements/BlueBurron"
+import { PopupLayout } from "../../shared/ui/layout/PopupLayout"
+import { Loader } from "../../shared/ui/elements/Loader"
+import { LoaderResult } from "../../shared/ui/elements/LoaderResult"
+import { EditingPopupForm } from "../../shared/admin/categories/EditCategoryForm"
+import { InputField } from "../../shared/ui/form/InputField"
 
 const fushData = [
   {title:'title01',
@@ -35,9 +41,49 @@ const fushData = [
 ]
 
 export const Categories =()=>{
+  const [popupState, setPopupState]=useState(false);
+  const [activeId, setActiveId] = useState(0)
+
+  const EditElement =(e: React.MouseEvent<HTMLDivElement>)=>{
+      const dataId = e.currentTarget.getAttribute('data-id');
+      if (dataId) {
+        setActiveId(dataId);
+        setPopupState(true);
+      }
+  }
 return(
+
 <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-  <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
+<PopupLayout
+  popupstate={popupState}
+  changePopupState={()=>setPopupState(false)}
+>
+  <h1 className=" text-black font-bold  text-3xl">Редактирвоание категории</h1>
+  {activeId}
+<form >
+
+  <InputField
+  type="text"
+  title="Название"
+  value="title10"
+  placeholder="Заголовок Категории"
+  name="title"/>
+  <div className=" w-full flex items-center mt-6 justify-center">
+  <BlueButton
+  title="Сохранить изменения"/>
+  </div>
+
+</form>
+    
+  
+  
+  {/* <Loader
+    loading={loading}
+  />
+  <LoaderResult
+  /> */}
+</PopupLayout>
+  <div className="mx-auto max-w-screen-xl px-4 lg:px-12 relative">
     Категории
     <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
       <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -91,6 +137,7 @@ return(
             <CategoryPreview key={data.id}
               name={data.title}
               id={data.id}
+              onClick={EditElement}
             />
            ))}
           </tbody>
