@@ -2,9 +2,6 @@ import { useState } from "react"
 import { CategoryPreview } from "../../shared/admin/categories/CategoryPreview"
 import { BlueButton } from "../../shared/ui/elements/BlueBurron"
 import { PopupLayout } from "../../shared/ui/layout/PopupLayout"
-import { Loader } from "../../shared/ui/elements/Loader"
-import { LoaderResult } from "../../shared/ui/elements/LoaderResult"
-import { EditingPopupForm } from "../../shared/admin/categories/EditCategoryForm"
 import { InputField } from "../../shared/ui/form/InputField"
 
 const fushData = [
