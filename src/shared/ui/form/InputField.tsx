@@ -9,7 +9,7 @@ interface InputProps {
     onChange:(event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const InputField:FC<InputProps> = ({title, placeholder,value='', type = 'text', name, onChange}) => {
+export const InputField:FC<InputProps> = ({title, placeholder,value, type = 'text', name, onChange}) => {
     return (
         <div className="">
         <label>
