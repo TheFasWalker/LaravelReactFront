@@ -3,13 +3,15 @@ import { BlueButton } from "../../shared/ui/elements/BlueBurron"
 import { InputField } from "../../shared/ui/form/InputField"
 import { Loader } from "../../shared/ui/elements/Loader"
 import { LoaderResult } from "../../shared/ui/elements/LoaderResult"
+import { useNavigate } from "react-router-dom"
+
 
 
 export const Login =()=>{
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
-    
+    const navigate = useNavigate();
     const handleChange = (e: { target: { name: string; value: string } }) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -31,9 +33,10 @@ export const Login =()=>{
                 throw new Error('Loging Error')
             }
             const data = await response.json();
-            const token = data.token;
+            const token = data.data.token;
             localStorage.setItem("bearer_token", token);
             console.log("Token received:", token);
+            navigate('/data')
         }catch (error){
             setError(error.message)
         }finally {
@@ -63,7 +66,6 @@ export const Login =()=>{
                         name="password"
                         placeholder="*********"
                         onChange={handleChange} />
-                    <input type="text" value='tel' name="device_name" />
                     <BlueButton title="Войти" />
                 </form>
             </div>
