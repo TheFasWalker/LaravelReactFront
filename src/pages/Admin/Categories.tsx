@@ -60,11 +60,11 @@ return(
 <form >
 
   <InputField
-  type="text"
-  title="Название"
-  value="title10"
-  placeholder="Заголовок Категории"
-  name="title"/>
+    type="text"
+    title="Название"
+    value="title10"
+    placeholder="Заголовок Категории"
+    name="title"/>
   <div className=" w-full flex items-center mt-6 justify-center">
   <BlueButton
   title="Сохранить изменения"/>
