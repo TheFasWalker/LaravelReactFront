@@ -1,7 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import authReduser from './slices/authSlice'
+import authReduser from './slices/authSlice';
+import tagsSlice from './slices/tagsSlice'
 const rootReduser = combineReducers({
-    authReduser
+    authReduser,
+    tagsSlice
 });
 
 export const setupStore =()=>{
