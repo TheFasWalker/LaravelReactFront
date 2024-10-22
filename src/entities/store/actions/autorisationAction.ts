@@ -21,6 +21,9 @@ export const autorisation = (email:string ,password:string)=>async(dispatch: App
         });
         dispatch(authSlice.actions.authSuccess(await responce));
         writeCookies('loginCookies', (await responce).data.token);
+        writeCookies('name', (await responce).data.user.name)
+        writeCookies('role', (await responce).data.user.role)
+        writeCookies('email', (await responce).data.user.email)
         
     }catch(e:any){
         dispatch(authSlice.actions.authError(e))

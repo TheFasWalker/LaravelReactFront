@@ -4,6 +4,9 @@ interface authState{
     token:string,
     isLoading:boolean,
     error:string
+    name:string,
+    email:string,
+    role:string
 }
 
 interface AuthSucsess {
@@ -22,7 +25,7 @@ interface User {
     name: string
     email: string
     email_verified_at: string
-    role: number
+    role: string
     created_at: string
     updated_at: string
     deleted_at: any
@@ -30,7 +33,10 @@ interface User {
   }
   
 interface loginWithCookies{
-    token:string
+    token:string,
+    name:string,
+    email:string,
+    role:string
 }
  interface ServerError {
     status: string
@@ -38,6 +44,9 @@ interface loginWithCookies{
   }
 const initialState: authState ={
     token:'',
+    name:'',
+    email:'',
+    role:'',
     isLoading:false,
     error:''
 }
@@ -49,14 +58,18 @@ export const authSlice = createSlice({
             state.isLoading=true
         },
         authWithCookies(state,action:PayloadAction<loginWithCookies>){
-            state.token = action.payload.token
-            
+            state.token = action.payload.token   
+            state.email=action.payload.email
+            state.name=action.payload.name   
+            state.role=action.payload.role   
         },
         authSuccess(state, action :PayloadAction<AuthSucsess>){
             state.isLoading=false
             state.token = action.payload.data.token
-            console.log('state')
-            console.log(state.token)
+            state.name= action.payload.data.user.name
+            state.email = action.payload.data.user.email
+            state.role = action.payload.data.user.role
+
         },
         authError(state,action:PayloadAction<ServerError>){
             state.isLoading = false
@@ -64,6 +77,9 @@ export const authSlice = createSlice({
         },
         authLogOut(state){
             state.token = ''
+            state.name= ''
+            state.email = ''
+            state.role = ''
         },
         authCleanError(state){
             state.error = ''

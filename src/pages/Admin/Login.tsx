@@ -22,7 +22,6 @@ export const Login = () => {
   const logger = async (email: string, password: string) => {
    await dispatch(autorisation(email,password))
     const redirectPath = (location.pathname as any)?.from?.pathname || '/data/'; 
-    console.log(redirectPath)
     navigate(redirectPath);
   };
   return (

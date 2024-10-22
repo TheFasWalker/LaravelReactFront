@@ -14,7 +14,7 @@ export interface authResult {
     name: string
     email: string
     email_verified_at: string
-    role: number
+    role: string
     created_at: string
     updated_at: string
     deleted_at: any
