@@ -1,22 +1,16 @@
-# Vite React Typescript Tailwind Template
+# Фронтенд на react TS  для бэка на laravel 
+<a href="">Бэк на laravel</a>
 
-<p align="center">
-    <img src="./public/vite-logo.png" width="240" height="240" alt="vite">
-    <br>
-    <br>
-</p>
 
-This template has been configured with all of the tools required to create a React Application using **TypeScript** and **TailwindCSS** with Vite.
+N.B!!! Запуск для разработки
 
-## Technologies
+запустить контейнер Laravel
+запустить сборщик vite в контейнере с laravel
+запустить react приложение
+п.с. Если запустить сначала реакт , потом запускать контейнер c Laravel может появиться конфликт портов
 
-![React](https://img.shields.io/badge/frontend-react-61DBFB?style=flat&logo=react)
-![TypeScript](https://img.shields.io/badge/frontend-ts-blue?style=flat&logo=typescript)
-![Tailwind](https://img.shields.io/badge/frontend-tailwind-00C4C4?style=flat&logo=tailwindcss)
-![ESLint](https://img.shields.io/badge/linter-eslint-4B32C3?style=flat&logo=eslint)
-![Prettier](https://img.shields.io/badge/formatter-prettier-F8BC45?style=flat&logo=prettier)
-![Vitest](https://img.shields.io/badge/specs-vitest-yellow?style=flat&logo=vitest)
-![Vite](https://img.shields.io/badge/build-vite-A855F7?style=flat&logo=vite)
+
+## Что есть в данной сборке :
 
 - [React](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
@@ -27,14 +21,13 @@ This template has been configured with all of the tools required to create a Rea
 - [Vite](https://vitejs.dev/) to build the project for development or production
 - [Husky 🐶](https://typicode.github.io/husky/) runs the full list of specs before committing your changes to ensure that you have a green build
 
-## Development
+## Разработка
 
 ### Setup
 
-1. `git clone https://github.com/nrabhiram/vite-react-ts-tailwind-template.git`
-2. Run `npm install` to install all of the project's dependencies
-3. Build the project for production: `npm run build`
-4. Run the local development server: `npm run dev`
+1. Run `npm install` to install all of the project's dependencies
+2. Build the project for production: `npm run build`
+3. Run the local development server: `npm run dev`
 
 ### Tailwind + CSS Modules
 
@@ -58,10 +51,6 @@ This template has been configured with all of the tools required to create a Rea
 - `build` - build the project files for distribution
 - `dev` - run the local development server
 
-## Contributing
 
-Feel free to [open an issue](https://github.com/nrabhiram/vite-react-ts-tailwind-template/issues/new) or create a PR if you'd like to contribute 🙌
 
-## License
-
-The project is available as open source under the terms of the [MIT License](LICENSE).
+Сборка взята <a href="https://github.com/nrabhiram/vite-react-ts-tailwind-template.git">тут</a>
