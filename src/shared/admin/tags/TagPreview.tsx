@@ -3,10 +3,10 @@ import { FC, useState, useEffect, useRef } from "react";
 interface PreviewInterface {
     name: string;
     id: string;
-    onClick?:()=>void;
+    edit?:(e: React.MouseEvent<HTMLDivElement>)=>void;
 }
 
-export const TagPreview: FC<PreviewInterface> = ({ name, id , onClick}) => {
+export const TagPreview: FC<PreviewInterface> = ({ name, id , edit}) => {
     const [dropDownState, setDropDownState] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -58,7 +58,7 @@ export const TagPreview: FC<PreviewInterface> = ({ name, id , onClick}) => {
                             <li>
                                 <button
                                 data-id={id}
-                                  onClick={onClick}
+                                  onClick={edit}
                                     className=" w-full text-left block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                 >
                                     Edit
