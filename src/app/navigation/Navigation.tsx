@@ -23,7 +23,7 @@ export const Navigation: FC = () => {
 
                 <Route element={<ProtectedRoute/>}>
                     <Route path='/data' element={<AdminLayout />}>
-                        <Route path='/data' element={<AdminHomePage />} />
+                        <Route index element={<AdminHomePage />} />
                         <Route path='posts' element={<Posts />} />
                         <Route path='categories' element={<Categories />} />
                         <Route path='tags' element={<Tags />} />

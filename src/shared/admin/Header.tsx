@@ -1,10 +1,11 @@
 import { useState } from "react"
-import { LoginPopup } from "../popup/LoginPopup"
-import { BlueButton } from "../ui/elements/BlueBurron"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
+import { useAppDispatch } from "../hooks/redux"
+import { authSlice } from "../../entities/store/slices/authSlice"
 
 export const Header = () => {
-
+const dispatch = useAppDispatch()
+const navigate = useNavigate();
   const [loginState, setLoginState] = useState(false);
   const [userDataPopup, setUserDataPopup] = useState(false)
 
@@ -17,7 +18,8 @@ export const Header = () => {
 
   }
   const logOutButton = () => {
-    setLoginState(true)
+    dispatch(authSlice.actions.authLogOut())
+    navigate('/login')
 
   }
 
@@ -85,7 +87,7 @@ export const Header = () => {
                   </ul>
                   <ul className="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
                     <li>
-                      <button onClick={loginButton} className="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</button>
+                      <button onClick={logOutButton} className="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</button>
                     </li>
                   </ul>
                 </div>

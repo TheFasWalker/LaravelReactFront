@@ -1,7 +1,7 @@
 import { PreviewPost } from "../../shared/admin/posts/PreviewPost"
 import { BlueButton } from "../../shared/ui/elements/BlueBurron"
 import { DropDownCheckboxes } from "../../shared/ui/form/DropDownCheckboxes"
-import { Toggler } from "../../shared/ui/form/Toggler"
+
 
 const fushData = [
   {title:'title01',
@@ -124,7 +124,8 @@ return(
   <PreviewPost
   name={data.title}
   id={data.id}
-  published={data.published}/>
+  published={data.published}
+  key={data.id}/>
 ))}
             
 

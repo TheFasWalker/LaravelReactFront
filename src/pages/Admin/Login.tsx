@@ -2,17 +2,32 @@ import { BlueButton } from "../../shared/ui/elements/BlueBurron";
 import { Loader } from "../../shared/ui/elements/Loader";
 import { Field, Form, Formik } from "formik";
 import { validateField } from "../../shared/helpers/validation";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux";
+import { autorisation } from "../../entities/store/actions/autorisationAction";
+import { useEffect } from "react";
+
 
 export const Login = () => {
-  const [loading, setLoaing] = useState(false);
-  const logger = (email: string, password: string) => {
-    console.log("loggin");
-    console.log(email);
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate();
+  
+ const {isLoading,token} = useAppSelector((state)=>state.authReduser)
+ useEffect(() => {
+  if (token) {
+    navigate('/data/'); 
+  }
+}, [token, navigate]);
+
+  const logger = async (email: string, password: string) => {
+   await dispatch(autorisation(email,password))
+    const redirectPath = (location.pathname as any)?.from?.pathname || '/data/'; 
+    console.log(redirectPath)
+    navigate(redirectPath);
   };
   return (
     <div className=" flex items-center justify-center h-[100vh] w-[100vw] flex-col">
-      <Loader loading={loading} />
+      <Loader loading={isLoading} />
       <Formik
         initialValues={{
           email: "",
@@ -30,7 +45,6 @@ export const Login = () => {
             </h3>
             <label>
               <span className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                {" "}
                 Login
               </span>
               <Field
@@ -67,7 +81,7 @@ export const Login = () => {
                 </div>
               )}
             </label>
-            <BlueButton title="Войти" />
+            <BlueButton title="Войти" type="submit" />
           </Form>
         )}
       </Formik>
