@@ -1,9 +1,9 @@
 export interface Itags {
-    data: tagData[]
+    data: Array<tagData>
     links: Links
     meta: Meta
   }
-  
+
   export interface tagData {
     id: number
     title: string
@@ -11,14 +11,14 @@ export interface Itags {
     updated_at: string
     deleted_at: any
   }
-  
+
   export interface Links {
     first: string
     last: string
     prev: any
     next: string
   }
-  
+
   export interface Meta {
     current_page: number
     from: number
@@ -29,19 +29,19 @@ export interface Itags {
     to: number
     total: number
   }
-  
+
   export interface Link {
     url?: string
     label: string
     active: boolean
   }
-  
+
 
 export interface Itag {
-    data(data: any): { payload: Itags; type: "tags/tagsFetchingSuccess" }
+    data:Array<tagData>
     id:number,
     title:string,
     created_at: string,
-	updated_at:  string,
-	deleted_at: null | string
+    updated_at:  string,
+    deleted_at: null | string
 }

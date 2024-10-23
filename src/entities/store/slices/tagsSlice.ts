@@ -58,7 +58,7 @@ export const tagsSlice = createSlice({
         },
         tagsPatch(state,action:PayloadAction<Itag>){
             state.isLoading = true;
-            
+
             let edittingTagIndex;
             state.data.data.forEach((elem,index)=>{
                 if(elem.id == action.payload.id){
@@ -68,7 +68,7 @@ export const tagsSlice = createSlice({
             state.data.data= state.data.data.filter((elem)=>elem.id !== action.payload.id)
             state.data.data.splice(Number(edittingTagIndex), 0 , action.payload)
         }
-        
+
     }
 })
 export default tagsSlice.reducer;
