@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux";
 import { getTags } from "../../entities/store/actions/tagsActions";
 import { Field, Form, Formik } from "formik";
 import { Pagination } from "../../shared/admin/HOC/pagination";
+import { tagData } from "../../entities/types/tags";
 
 export const Tags = () => {
   const dispatch = useAppDispatch();
@@ -17,9 +18,15 @@ export const Tags = () => {
   const bearerToken = useAppSelector((state) => state.authReduser.token);
   const [popupState, setPopupState] = useState(false);
   const [createTagPopupState, setCreateTagPopupState] = useState(false);
+  const [popupData, setPopupData] = useState<tagData>()
 
   const EditElement = (e: React.MouseEvent<HTMLDivElement>) => {
     const dataId = e.currentTarget.getAttribute("data-id");
+    data.data.forEach(element => {
+      if(element.id == Number(dataId)){
+        return setPopupData(element)
+      }
+    });
     setPopupState(!popupState);
   };
   const openCreatingTagPopup = () => {
@@ -76,7 +83,7 @@ export const Tags = () => {
 
         <Formik
           initialValues={{
-            title: ''
+            title: popupData?.title
           }}
           onSubmit={() => console.log('data')}>
           {({ errors, touched }) => (
@@ -87,7 +94,7 @@ export const Tags = () => {
                   Название Тэга
                 </span>
                 <Field
-                  type="еуче"
+                  type="text"
                   name="title"
                   className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.title && touched.title && "bg-red-200 border-red-500"
                     }`}
