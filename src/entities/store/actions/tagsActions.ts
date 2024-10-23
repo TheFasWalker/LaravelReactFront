@@ -18,3 +18,18 @@ export const getTags = (token:string) =>async (dispatch :AppDispatch)=>{
         dispatch(tagsSlice.actions.tagsFetchingErrorr(e.message))
     }
 }
+export const deleteTagById = (token:string, id:string) =>(dispatch: AppDispatch)=>{
+    try{
+        dispatch(tagsSlice.actions.tagsFetching())
+        const responce =  fetchData(`/tags/${id}`,{
+            method:'DELETE',
+            headers:{
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        })
+        dispatch (tagsSlice.actions.tagsDeleteById(id))
+    }catch(e:any){
+        dispatch(tagsSlice.actions.tagsFetchingErrorr(e.message))
+    }
+}

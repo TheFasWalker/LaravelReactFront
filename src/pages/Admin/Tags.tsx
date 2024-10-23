@@ -5,10 +5,12 @@ import { InputField } from "../../shared/ui/form/InputField";
 import { TagPreview } from "../../shared/admin/tags/TagPreview";
 import { Loader } from "../../shared/ui/elements/Loader";
 import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux";
-import { getTags } from "../../entities/store/actions/tagsActions";
+import { deleteTagById, getTags } from "../../entities/store/actions/tagsActions";
 import { Field, Form, Formik } from "formik";
 import { Pagination } from "../../shared/admin/HOC/pagination";
 import { tagData } from "../../entities/types/tags";
+import { authSlice } from "../../entities/store/slices/authSlice";
+import { tagsSlice } from "../../entities/store/slices/tagsSlice";
 
 export const Tags = () => {
   const dispatch = useAppDispatch();
@@ -29,6 +31,12 @@ export const Tags = () => {
     });
     setPopupState(!popupState);
   };
+  const deleteElement =(e: React.MouseEvent<HTMLDivElement>)=>{
+    const dataId = e.currentTarget.getAttribute("data-id");
+    console.log(dataId)
+    dispatch(deleteTagById( bearerToken,dataId))
+    dispatch(tagsSlice.actions.tagsDeleteById(dataId))
+  }
   const openCreatingTagPopup = () => {
     setCreateTagPopupState(!createTagPopupState);
   };
@@ -180,6 +188,7 @@ export const Tags = () => {
                       name={item.title}
                       id={item.id}
                       edit={EditElement}
+                      deleteEl={deleteElement}
                     />
                   ))}
                 </tbody>

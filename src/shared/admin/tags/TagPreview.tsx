@@ -4,9 +4,10 @@ interface PreviewInterface {
     name: string;
     id: number;
     edit?:(e: React.MouseEvent<HTMLDivElement>)=>void;
+    deleteEl?:(e: React.MouseEvent<HTMLDivElement>)=>void;
 }
 
-export const TagPreview: FC<PreviewInterface> = ({ name, id , edit}) => {
+export const TagPreview: FC<PreviewInterface> = ({ name, id , edit, deleteEl}) => {
     const [dropDownState, setDropDownState] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -67,6 +68,8 @@ export const TagPreview: FC<PreviewInterface> = ({ name, id , edit}) => {
                         </ul>
                         <div className="py-1">
                             <button
+                            data-id={id}
+                            onClick={deleteEl}
                                 className=" w-full text-left block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                             >
                                 Delete
