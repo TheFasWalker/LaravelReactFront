@@ -2,7 +2,7 @@ import { FC, useState, useEffect, useRef } from "react";
 
 interface PreviewInterface {
     name: string;
-    id: string;
+    id: number;
     edit?:(e: React.MouseEvent<HTMLDivElement>)=>void;
 }
 
@@ -51,7 +51,7 @@ export const TagPreview: FC<PreviewInterface> = ({ name, id , edit}) => {
                 </button>
                 {dropDownState && (
                     <div
-                        ref={dropdownRef} 
+                        ref={dropdownRef}
                         className="z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute"
                     >
                         <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
