@@ -118,7 +118,7 @@ export const Tags = () => {
                 </thead>
                 <tbody>
 
-                  {data.map((item) => (
+                  {data.data.map((item) => (
                     <TagPreview
                       key={item.id}
                       name={item.title}

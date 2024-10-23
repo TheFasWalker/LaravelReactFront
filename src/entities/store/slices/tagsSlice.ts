@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Itag, Itags } from "../../types/tags";
 
-export interface tagsData {
+type tagsData= {
     data: Itags
     isLoading:boolean,
     error:string

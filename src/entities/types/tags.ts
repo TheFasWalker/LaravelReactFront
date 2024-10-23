@@ -1,10 +1,10 @@
-export interface Itags {
+export type Itags = {
     data: tagData[]
     links: Links
     meta: Meta
   }
 
-  export interface tagData {
+  export type tagData ={
     id: number
     title: string
     created_at: string
