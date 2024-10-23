@@ -5,7 +5,7 @@ import { InputField } from "../../shared/ui/form/InputField";
 import { TagPreview } from "../../shared/admin/tags/TagPreview";
 import { Loader } from "../../shared/ui/elements/Loader";
 import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux";
-import { createTag, deleteTagById, getTags } from "../../entities/store/actions/tagsActions";
+import { createTag, deleteTagById, editTag, getTags } from "../../entities/store/actions/tagsActions";
 import { Field, Form, Formik } from "formik";
 import { Pagination } from "../../shared/admin/HOC/pagination";
 import { tagData } from "../../entities/types/tags";
@@ -21,19 +21,24 @@ export const Tags = () => {
   const [popupState, setPopupState] = useState(false);
   const [createTagPopupState, setCreateTagPopupState] = useState(false);
   const [popupData, setPopupData] = useState<tagData>()
-
-  const EditElement = (e: React.MouseEvent<HTMLDivElement>) => {
-    const dataId = e.currentTarget.getAttribute("data-id");
+  const [elementIdToEdit , setElementIdToEdit]= useState('')
+  const saveEditingTagData =(title:string, )=>{
+     dispatch(editTag(bearerToken,title,elementIdToEdit));
+     setPopupState(!popupState)
+  }
+  
+  const EditElementPopup = (e: React.MouseEvent<HTMLDivElement>) => {
+    const dataId = (e.currentTarget.getAttribute("data-id"));
     data.data.forEach(element => {
       if(element.id == Number(dataId)){
         return setPopupData(element)
       }
     });
+    setElementIdToEdit(dataId);
     setPopupState(!popupState);
   };
   const deleteElement =(e: React.MouseEvent<HTMLDivElement>)=>{
     const dataId = e.currentTarget.getAttribute("data-id");
-    console.log(dataId)
     dispatch(deleteTagById( bearerToken,dataId))
     dispatch(tagsSlice.actions.tagsDeleteById(dataId))
   }
@@ -99,7 +104,7 @@ export const Tags = () => {
           initialValues={{
             title: popupData?.title
           }}
-          onSubmit={() => console.log('data')}>
+          onSubmit={(values) => saveEditingTagData(values.title,bearerToken)}>
           {({ errors, touched }) => (
             <Form className="flex flex-col  gap-3 w-full">
               <h1 className=" text-black font-bold  text-3xl">Редактирвоание Тэга</h1>
@@ -193,7 +198,7 @@ export const Tags = () => {
                       key={item.id}
                       name={item.title}
                       id={item.id}
-                      edit={EditElement}
+                      edit={EditElementPopup}
                       deleteEl={deleteElement}
                     />
                   ))}

@@ -57,7 +57,7 @@ export const tagsSlice = createSlice({
             state.data.data.push(action.payload)
         },
         tagsPatch(state,action:PayloadAction<Itag>){
-            state.isLoading = true;
+            state.isLoading = false;
 
             let edittingTagIndex;
             state.data.data.forEach((elem,index)=>{

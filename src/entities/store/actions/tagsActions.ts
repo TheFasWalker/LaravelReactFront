@@ -49,7 +49,27 @@ export const createTag = (token:string, title: string)=>async(dispatch:AppDispat
             body: JSON.stringify(data),
         });
         dispatch(tagsSlice.actions.tagsCreate(await responce))
-    }catch(e){
+    }catch(e:any){
+        dispatch(tagsSlice.actions.tagsFetchingErrorr(e.message))
+    }
+}
+export const editTag = (token:string, title:string,id:string) => async (dispatch :AppDispatch)=>{
+    try{
+        dispatch(tagsSlice.actions.tagsFetching())
+        const data = {
+            title : title
+        }
+        const responce = fetchData<Itag>(`/tags/${id}`,{
+            method:"PATCH",
+            headers:{
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        dispatch(tagsSlice.actions.tagsPatch(await responce))
 
+    }catch(e:any){
+        dispatch(tagsSlice.actions.tagsFetchingErrorr(e.message))
     }
 }
