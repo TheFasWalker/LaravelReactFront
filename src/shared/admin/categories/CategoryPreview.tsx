@@ -2,7 +2,7 @@ import { FC, useState, useEffect, useRef } from "react";
 
 interface PreviewInterface {
     name: string;
-    id: string;
+    id: number;
     onClick?:()=>void;
 }
 

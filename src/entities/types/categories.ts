@@ -1,24 +1,23 @@
-export interface Itags {
-    data: tagData[]
-    links: Links
-    meta: Meta
-  }
-
-  export interface tagData {
+export type categoryData ={
+    data:Category[],
+    links:Links,
+    meta:Meta
+}
+export type Category = {
     id: number
     title: string
     created_at: string
     updated_at: string
     deleted_at: any
   }
+  
 
-  export interface Links {
+export interface Links {
     first: string
     last: string
     prev: any
     next: string
-  }
-
+  }  
   export interface Meta {
     current_page: number
     from: number
@@ -29,19 +28,8 @@ export interface Itags {
     to: number
     total: number
   }
-
   export interface Link {
     url?: string
     label: string
     active: boolean
   }
-
-
-export interface Itag {
-    data:Array<tagData>
-    id:number,
-    title:string,
-    created_at: string,
-    updated_at:  string,
-    deleted_at: null | string
-}

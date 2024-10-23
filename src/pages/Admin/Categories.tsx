@@ -1,57 +1,34 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CategoryPreview } from "../../shared/admin/categories/CategoryPreview"
 import { BlueButton } from "../../shared/ui/elements/BlueBurron"
 import { PopupLayout } from "../../shared/ui/layout/PopupLayout"
 import { InputField } from "../../shared/ui/form/InputField"
-
-const fushData = [
-  {title:'title01',
-    id:"01"
-  },
-  {title:'title02',
-    id:"02"
-  },
-  {title:'title03',
-    id:"03"
-  },
-  {title:'title04',
-    id:"04"
-  },
-  {title:'title05',
-    id:"05"
-  },
-  {title:'title06',
-    id:"06"
-  },
-  {title:'title07',
-    id:"07"
-  },
-  {title:'title08',
-    id:"08"
-  },
-  {title:'title09',
-    id:"09"
-  },
-  {title:'title10',
-    id:"10"
-  },
-]
+import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux"
+import { Loader } from "../../shared/ui/elements/Loader"
+import { getCategories } from "../../entities/store/actions/categoriesAction"
 
 export const Categories =()=>{
+  const dispatch = useAppDispatch()
+  const bearerToken = useAppSelector((state)=>state.authReduser.token) 
+  const{isLoading ,data,error } =useAppSelector((state)=>state.categoriesReduser)
   const [popupState, setPopupState]=useState(false);
   const [activeId, setActiveId] = useState(0)
 
   const EditElement =(e: React.MouseEvent<HTMLDivElement>)=>{
-      const dataId = e.currentTarget.getAttribute('data-id');
-      if (dataId) {
-        setActiveId(dataId);
-        setPopupState(true);
-      }
+      // const dataId = e.currentTarget.getAttribute('data-id');
+      // if (dataId) {
+      //   setActiveId(dataId);
+      //   setPopupState(true);
+      // }
   }
+  useEffect(()=>{
+    console.log('loading')
+    dispatch(getCategories(bearerToken));
+  },[])
 return(
 
 <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-<PopupLayout
+{/* <PopupLayout
   popupstate={popupState}
   changePopupState={()=>setPopupState(false)}
 >
@@ -70,7 +47,7 @@ return(
   title="Сохранить изменения"/>
   </div>
 
-</form>
+</form> */}
     
   
   
@@ -79,9 +56,12 @@ return(
   />
   <LoaderResult
   /> */}
-</PopupLayout>
+{/* </PopupLayout> */}
   <div className="mx-auto max-w-screen-xl px-4 lg:px-12 relative">
     Категории
+    <Loader
+    loading={isLoading}
+  />
     <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
       <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
         <div className="w-full md:w-1/2">
@@ -130,13 +110,19 @@ return(
             </tr>
           </thead>
           <tbody>
-           {fushData.map((data)=>(
+            {data.data.map((elem)=>(
+              <CategoryPreview 
+              key={elem.id}
+              name={elem.title}
+              id={elem.id}/>
+            ))}
+           {/* {fushData.map((data)=>(
             <CategoryPreview key={data.id}
               name={data.title}
               id={data.id}
               onClick={EditElement}
             />
-           ))}
+           ))} */}
           </tbody>
         </table>
       </div>
