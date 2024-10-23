@@ -5,7 +5,7 @@ import { InputField } from "../../shared/ui/form/InputField";
 import { TagPreview } from "../../shared/admin/tags/TagPreview";
 import { Loader } from "../../shared/ui/elements/Loader";
 import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux";
-import { deleteTagById, getTags } from "../../entities/store/actions/tagsActions";
+import { createTag, deleteTagById, getTags } from "../../entities/store/actions/tagsActions";
 import { Field, Form, Formik } from "formik";
 import { Pagination } from "../../shared/admin/HOC/pagination";
 import { tagData } from "../../entities/types/tags";
@@ -40,6 +40,10 @@ export const Tags = () => {
   const openCreatingTagPopup = () => {
     setCreateTagPopupState(!createTagPopupState);
   };
+  const creatingTag = (title:string, token:string)=>{
+    dispatch(createTag(token, title));
+    setCreateTagPopupState(!createTagPopupState)
+  }
 
   useEffect(() => {
     dispatch(getTags(bearerToken));
@@ -55,7 +59,9 @@ export const Tags = () => {
           initialValues={{
             title: ''
           }}
-          onSubmit={() => console.log('data')}>
+          onSubmit={(values) => {
+            creatingTag( values.title, bearerToken)
+          }}>
           {({ errors, touched }) => (
             <Form className="flex flex-col  gap-3 w-full">
               <h1 className=" text-black font-bold  text-3xl">Создать тэг</h1>

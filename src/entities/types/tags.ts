@@ -45,3 +45,6 @@ export interface Itag {
     updated_at:  string,
     deleted_at: null | string
 }
+export type CreateTag={
+  title:string
+}

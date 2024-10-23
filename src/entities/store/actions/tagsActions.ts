@@ -1,5 +1,6 @@
+import { json } from "react-router-dom";
 import { fetchData } from "../../../shared/helpers/fetchData";
-import { Itags } from "../../types/tags";
+import { CreateTag, Itag, Itags, tagData } from "../../types/tags";
 import { tagsSlice } from "../slices/tagsSlice";
 import { AppDispatch } from "../store";
 
@@ -31,5 +32,24 @@ export const deleteTagById = (token:string, id:string) =>(dispatch: AppDispatch)
         dispatch (tagsSlice.actions.tagsDeleteById(id))
     }catch(e:any){
         dispatch(tagsSlice.actions.tagsFetchingErrorr(e.message))
+    }
+}
+export const createTag = (token:string, title: string)=>async(dispatch:AppDispatch)=>{
+    try{
+        dispatch(tagsSlice.actions.tagsFetching())
+        const data = {
+            title:title
+        }
+        const responce = fetchData<Itag>(`/tags`,{
+            method:"POST",
+            headers:{
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        dispatch(tagsSlice.actions.tagsCreate(await responce))
+    }catch(e){
+
     }
 }

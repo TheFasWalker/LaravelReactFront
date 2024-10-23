@@ -53,7 +53,7 @@ export const tagsSlice = createSlice({
             state.data.data = state.data.data.filter((elem)=>elem.id !== Number(action.payload))
         },
         tagsCreate(state,action:PayloadAction<Itag>){
-            state.isLoading = true;
+            state.isLoading = false;
             state.data.data.push(action.payload)
         },
         tagsPatch(state,action:PayloadAction<Itag>){
