@@ -22,7 +22,7 @@ export const Categories =()=>{
       // }
   }
   useEffect(()=>{
-    console.log('loading')
+
     dispatch(getCategories(bearerToken));
   },[])
 return(

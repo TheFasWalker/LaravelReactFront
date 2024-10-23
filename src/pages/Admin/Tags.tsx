@@ -6,6 +6,7 @@ import { TagPreview } from "../../shared/admin/tags/TagPreview";
 import { Loader } from "../../shared/ui/elements/Loader";
 import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux";
 import { getTags } from "../../entities/store/actions/tagsActions";
+import { Field, Form, Formik } from "formik";
 
 export const Tags = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ export const Tags = () => {
 
   useEffect(() => {
     dispatch(getTags(bearerToken));
-    console.log(data)
+
   }, []);
   return (
     <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
@@ -34,9 +35,37 @@ export const Tags = () => {
         popupstate={createTagPopupState}
         changePopupState={() => setCreateTagPopupState(!createTagPopupState)}
       >
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia assumenda
-        aliquid est incidunt suscipit unde recusandae maiores aspernatur illo
-        voluptas!
+      <Formik 
+      initialValues={{
+        title:''
+      }} 
+      onSubmit={()=>console.log('data')}>
+      {({errors,touched})=>(
+        <Form className="flex flex-col  gap-3 w-full">
+          <h1 className=" text-black font-bold  text-3xl">Создать тэг</h1>
+          <label>
+                    <span className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      Название Тэга
+                    </span>
+                    <Field
+                      type="еуче"
+                      name="title"
+                      className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                        errors.title && touched.title && "bg-red-200 border-red-500"
+                      }`}
+
+                    />
+                    {errors.title && touched.title && (
+                      <div className="mt-2 text-sm text-red-600 dark:text-red-500">
+                        {errors.title}
+                      </div>
+                    )}
+                  </label>
+                  <BlueButton title="Сохранить" type="submit" />
+        </Form>
+      )}
+        
+      </Formik>
       </PopupLayout>
       <PopupLayout
         popupstate={popupState}
