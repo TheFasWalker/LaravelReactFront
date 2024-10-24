@@ -60,7 +60,11 @@ export const DropDown: FC<DropDownProps> = ({ title, linksData }) => {
                         <li key={index}>
                             <NavLink
                                 to={item.link}
-                                className="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                className={
+                                    ({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700  bg-gray-200" : `flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 `
+
+                                    }
                             >
                                 {item.name}
                             </NavLink>
