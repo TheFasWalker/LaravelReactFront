@@ -3,10 +3,11 @@ import { FC, useState, useEffect, useRef } from "react";
 interface PreviewInterface {
     name: string;
     id: number;
-    onClick?:()=>void;
+    edit?: (e: React.MouseEvent<HTMLDivElement>)=>void;
+    deleteEl?:(e: React.MouseEvent<HTMLDivElement>)=>void;
 }
 
-export const CategoryPreview: FC<PreviewInterface> = ({ name, id , onClick}) => {
+export const CategoryPreview: FC<PreviewInterface> = ({ name, id , edit,deleteEl}) => {
     const [dropDownState, setDropDownState] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -51,14 +52,14 @@ export const CategoryPreview: FC<PreviewInterface> = ({ name, id , onClick}) => 
                 </button>
                 {dropDownState && (
                     <div
-                        ref={dropdownRef} 
+                        ref={dropdownRef}
                         className="z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute"
                     >
                         <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
                             <li>
                                 <button
                                 data-id={id}
-                                  onClick={onClick}
+                                  onClick={edit}
                                     className=" w-full text-left block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                 >
                                     Edit
@@ -67,6 +68,8 @@ export const CategoryPreview: FC<PreviewInterface> = ({ name, id , onClick}) => 
                         </ul>
                         <div className="py-1">
                             <button
+                                 data-id={id}
+                                onClick={deleteEl}
                                 className=" w-full text-left block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                             >
                                 Delete

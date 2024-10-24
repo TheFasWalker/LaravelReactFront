@@ -2,25 +2,39 @@ import { useEffect, useState } from "react"
 import { CategoryPreview } from "../../shared/admin/categories/CategoryPreview"
 import { BlueButton } from "../../shared/ui/elements/BlueBurron"
 import { PopupLayout } from "../../shared/ui/layout/PopupLayout"
-import { InputField } from "../../shared/ui/form/InputField"
 import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux"
 import { Loader } from "../../shared/ui/elements/Loader"
 import { getCategories } from "../../entities/store/actions/categoriesAction"
 import { Pagination } from "../../shared/admin/HOC/pagination"
+import { Category } from "../../entities/types/categories"
 
-export const Categories =()=>{
+export const Categories = () => {
   const dispatch = useAppDispatch()
-  const bearerToken = useAppSelector((state)=>state.authReduser.token) 
-  const{isLoading ,data,error } =useAppSelector((state)=>state.categoriesReduser)
-  const [popupState, setPopupState]=useState(false);
-  const [activeId, setActiveId] = useState(0)
+  const bearerToken = useAppSelector((state) => state.authReduser.token)
+  const { isLoading, data, error } = useAppSelector((state) => state.categoriesReduser)
+  const [createCategoryPopupState, setCreateCategoryPopupState] = useState(false)
+  const [categoryPopupState, setCategoryPopupState] = useState(false)
+  const [popUpData, setPopUpData] = useState<Category>()
+  const [categoryIdToEdit, setCategoryIdToEdit] = useState()
 
-  const EditElement =(e: React.MouseEvent<HTMLDivElement>)=>{
-      // const dataId = e.currentTarget.getAttribute('data-id');
-      // if (dataId) {
-      //   setActiveId(dataId);
-      //   setPopupState(true);
-      // }
+  const editElement =(e: React.MouseEvent<HTMLDivElement>)=>{
+    const dataId = e.currentTarget.getAttribute('data-id');
+    setCategoryIdToEdit(dataId)
+    data.data.forEach(element => {
+      if (element.id == Number(dataId)) {
+        return setPopUpData(element)
+      }
+    })
+    setCategoryPopupState(true)
+    console.log(dataId)
+    console.log('editing =' , dataId)
+
+  }
+  const deleteElement =(e: React.MouseEvent<HTMLDivElement>)=>{
+    const dataId = e.currentTarget.getAttribute('data-id');
+    console.log(dataId)
+    console.log('dekete =' , dataId)
+
   }
   useEffect(()=>{
 
@@ -29,35 +43,21 @@ export const Categories =()=>{
 return(
 
 <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-{/* <PopupLayout
-  popupstate={popupState}
-  changePopupState={()=>setPopupState(false)}
->
-  <h1 className=" text-black font-bold  text-3xl">Редактирвоание категории</h1>
-  {activeId}
-<form >
+<PopupLayout
+  popupstate={createCategoryPopupState}
+  changePopupState={()=>setCreateCategoryPopupState(false)}
+    >
+       Create  category popup
+ <h1 className=" text-black font-bold  text-3xl">Создание категории</h1>
 
-  <InputField
-    type="text"
-    title="Название"
-    value="title10"
-    placeholder="Заголовок Категории"
-    name="title"/>
-  <div className=" w-full flex items-center mt-6 justify-center">
-  <BlueButton
-  title="Сохранить изменения"/>
-  </div>
+    </PopupLayout>
+    <PopupLayout
+      popupstate={categoryPopupState}
+      changePopupState={() => setCategoryPopupState(false)}>
 
-</form> */}
-    
-  
-  
-  {/* <Loader
-    loading={loading}
-  />
-  <LoaderResult
-  /> */}
-{/* </PopupLayout> */}
+      <h1 className=" text-black font-bold  text-3xl">Редактирование категории</h1>
+      {popUpData?.title}
+    </PopupLayout>
   <div className="mx-auto max-w-screen-xl px-4 lg:px-12 relative">
     Категории
     <Loader
@@ -93,7 +93,7 @@ return(
           </form>
         </div>
         <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-          <BlueButton title="+ Add Item" />
+          <BlueButton onClick={()=>setCreateCategoryPopupState(true)} title="+ Add Item" />
 
         </div>
       </div>
@@ -104,7 +104,7 @@ return(
               <th scope="col" className="px-4 py-3">
                 Product name
               </th>
-             
+
               <th scope="col" className="px-4 py-3">
                 <span className="sr-only">Actions</span>
               </th>
@@ -112,18 +112,15 @@ return(
           </thead>
           <tbody>
             {data.data.map((elem)=>(
-              <CategoryPreview 
+              <CategoryPreview
               key={elem.id}
               name={elem.title}
-              id={elem.id}/>
+                id={elem.id}
+                edit={editElement}
+                deleteEl={deleteElement}
+              />
             ))}
-           {/* {fushData.map((data)=>(
-            <CategoryPreview key={data.id}
-              name={data.title}
-              id={data.id}
-              onClick={EditElement}
-            />
-           ))} */}
+
           </tbody>
         </table>
       </div>
