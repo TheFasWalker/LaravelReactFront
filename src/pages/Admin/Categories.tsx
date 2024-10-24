@@ -32,17 +32,10 @@ export const Categories = () => {
     console.log('editing =' , dataId)
 
   }
-  // const deleteElement =(e: React.MouseEvent<HTMLDivElement>)=>{
-  //   const dataId = e.currentTarget.getAttribute('data-id');
 
-  //   dispatch(deleteCategoryById(bearerToken,dataId))
-  //   dispatch(categorySlice.actions.categoriesDeleteById(dataId))
-  //   console.log('deдete =' , dataId)
-
-  // }
   const createCategoryFunc=(title:string, token:string)=>{
     dispatch(createCategoty(token, title));
-    // dispatch(categorySlice.actions.categoriesCreate())
+    setCreateCategoryPopupState(false)
   }
   useEffect(()=>{
 
@@ -59,7 +52,7 @@ return(
       initialValues={{
         title:''
       }}
-      onSubmit={()=>console.log('asdfaa')}>
+      onSubmit={(values)=>createCategoryFunc(values.title, bearerToken)}>
         {({errors,touched})=>(
           <Form className="flex flex-col  gap-3 w-full">
             <h1 className=" text-black font-bold  text-3xl">Создание категории</h1>
@@ -191,7 +184,6 @@ return(
                 deleteEl={()=>{
                   dispatch(deleteCategoryById(bearerToken, elem.id))
                   dispatch(categorySlice.actions.categoriesDeleteById(elem.id))
-                  console.log(data)
                 }}
               />
             ))}
