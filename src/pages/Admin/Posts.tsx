@@ -1,6 +1,10 @@
+import { useEffect } from "react"
 import { PreviewPost } from "../../shared/admin/posts/PreviewPost"
+import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux"
 import { BlueButton } from "../../shared/ui/elements/BlueBurron"
+import { Loader } from "../../shared/ui/elements/Loader"
 import { DropDownCheckboxes } from "../../shared/ui/form/DropDownCheckboxes"
+import { getPosts } from "../../entities/store/actions/postAction"
 
 
 const fushData = [
@@ -46,10 +50,21 @@ const fushData = [
   },
 ]
 
+
 export const Posts =()=>{
+  const bearerToken = useAppSelector((state)=>state.authReduser.token);
+  const dispatch = useAppDispatch();
+  const {isLoading, data, error}= useAppSelector((state)=>state.postReduser);
+  useEffect(()=>{
+      dispatch(getPosts(bearerToken))
+      console.log(data)
+  },[])
 return(
 <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
   Список постов
+  <Loader loading={isLoading}
+  />
+
   <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
     <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
       <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -120,11 +135,11 @@ return(
             </tr>
           </thead>
           <tbody>
-{fushData.map((data,index)=>(
+{data.data.map((data,index)=>(
   <PreviewPost
   name={data.title}
   id={data.id}
-  published={data.published}
+  published={data.is_published}
   key={data.id}/>
 ))}
             

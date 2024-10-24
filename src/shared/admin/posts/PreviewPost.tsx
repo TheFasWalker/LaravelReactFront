@@ -3,8 +3,8 @@ import { FC, useState, useEffect, useRef } from "react";
 
 interface PostInterface {
     name: string;
-    id: string;
-    published?:boolean,
+    id: number;
+    published?:number,
     onClick?:()=>void;
 }
 
@@ -38,10 +38,10 @@ export const PreviewPost: FC<PostInterface> = ({ name,published, id , onClick}) 
                 scope="row"
                 className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
             >
-                {published && (
+                {published == 1 && (
                     <span className="flex px-3 py-2 rounded-md text-white  w-28 items-center justify-center bg-green-600">published</span>
                 )}
-                                {!published && (
+                                {published == 0 && (
                     <span className="flex px-3 py-2 rounded-md text-white w-28 items-center justify-center bg-red-600 font-bold">not published</span>
                 )}
             </th>
