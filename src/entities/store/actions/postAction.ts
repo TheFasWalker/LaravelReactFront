@@ -4,10 +4,16 @@ import { postsSlice } from "../slices/postSlice";
 import { AppDispatch } from "../store";
 
 
-export const getPosts = (token:string)=>async (dispatch:AppDispatch)=>{
+export const getPosts = (token:string, sorting:string='')=>async (dispatch:AppDispatch)=>{
+   let query = '';
+    if(sorting){
+        query = `?${sorting}`
+    }
+    
+    
     try{
         dispatch(postsSlice.actions.postFetching());
-        const responce = fetchData<Iposts>('/posts',{
+        const responce = fetchData<Iposts>(`/posts${query}`,{
             method:'GET',
             headers:{
                 Authorization: `Bearer ${token}`,
