@@ -7,6 +7,7 @@ import { Loader } from "../../shared/ui/elements/Loader"
 import { getCategories } from "../../entities/store/actions/categoriesAction"
 import { Pagination } from "../../shared/admin/HOC/pagination"
 import { Category } from "../../entities/types/categories"
+import { Field, Form, Formik } from "formik"
 
 export const Categories = () => {
   const dispatch = useAppDispatch()
@@ -47,8 +48,38 @@ return(
   popupstate={createCategoryPopupState}
   changePopupState={()=>setCreateCategoryPopupState(false)}
     >
-       Create  category popup
- <h1 className=" text-black font-bold  text-3xl">Создание категории</h1>
+      <Formik
+      initialValues={{
+        title:''
+      }}
+      onSubmit={()=>console.log('asdfaa')}>
+        {({errors,touched})=>(
+          <Form className="flex flex-col  gap-3 w-full">
+            <h1 className=" text-black font-bold  text-3xl">Создание категории</h1>
+            <label>
+                <span className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Название Категории
+                </span>
+                <Field
+                  type="text"
+                  name="title"
+                  placeholder="Заголовк категории"
+                  className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.title && touched.title && "bg-red-200 border-red-500"
+                    }`}
+
+                />
+                {errors.title && touched.title && (
+                  <div className="mt-2 text-sm text-red-600 dark:text-red-500">
+                    {errors.title}
+                  </div>
+                )}
+                </label>
+            <BlueButton title="Сохранить" type="submit" />
+          </Form>
+        )}
+
+      </Formik>
+ 
 
     </PopupLayout>
     <PopupLayout
