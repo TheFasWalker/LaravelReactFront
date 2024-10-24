@@ -4,7 +4,7 @@ import { BlueButton } from "../../shared/ui/elements/BlueBurron"
 import { PopupLayout } from "../../shared/ui/layout/PopupLayout"
 import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux"
 import { Loader } from "../../shared/ui/elements/Loader"
-import { createCategoty, deleteCategoryById, getCategories } from "../../entities/store/actions/categoriesAction"
+import { createCategoty, deleteCategoryById, editCategory, getCategories } from "../../entities/store/actions/categoriesAction"
 import { Pagination } from "../../shared/admin/HOC/pagination"
 import { Category } from "../../entities/types/categories"
 import { Field, Form, Formik } from "formik"
@@ -28,8 +28,6 @@ export const Categories = () => {
       }
     })
     setCategoryPopupState(true)
-    console.log(dataId)
-    console.log('editing =' , dataId)
 
   }
 
@@ -37,6 +35,9 @@ export const Categories = () => {
     dispatch(createCategoty(token, title));
     setCreateCategoryPopupState(false)
   }
+  // const editCategoryData = (title:string) =>{
+
+  // }
   useEffect(()=>{
 
     dispatch(getCategories(bearerToken));
@@ -92,7 +93,11 @@ return(
       initialValues={{
         title:popUpData?.title
       }}
-      onSubmit={()=>console.log('sss')}>
+      onSubmit={(values)=>{
+        dispatch(editCategory(bearerToken, values.title ,categoryIdToEdit))
+        setCategoryPopupState(false)
+        
+      }}>
            {({errors,touched})=>(
          <Form className="flex flex-col  gap-3 w-full">
           <h1 className=" text-black font-bold  text-3xl">Редактирование категории</h1>

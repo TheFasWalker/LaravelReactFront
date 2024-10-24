@@ -57,7 +57,7 @@ export const categorySlice = createSlice({
             state.data.data.push(action.payload)
         },
         categoriesPatch(state, action: PayloadAction<Category>) {
-            state.isLoading = true;
+            state.isLoading = false;
             let editingCategoryIndex;
             state.data.data.forEach((elem, index) => {
                 if (elem.id == action.payload.id) {
