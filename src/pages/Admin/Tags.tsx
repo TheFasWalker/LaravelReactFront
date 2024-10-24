@@ -37,11 +37,6 @@ export const Tags = () => {
     setElementIdToEdit(dataId);
     setPopupState(!popupState);
   };
-  const deleteElement =(e: React.MouseEvent<HTMLDivElement>)=>{
-    const dataId = e.currentTarget.getAttribute("data-id");
-    dispatch(deleteTagById( bearerToken,dataId))
-    dispatch(tagsSlice.actions.tagsDeleteById(dataId))
-  }
   const openCreatingTagPopup = () => {
     setCreateTagPopupState(!createTagPopupState);
   };
@@ -104,7 +99,7 @@ export const Tags = () => {
           initialValues={{
             title: popupData?.title
           }}
-          onSubmit={(values) => saveEditingTagData(values.title,bearerToken)}>
+          onSubmit={(values) => saveEditingTagData(values.title)}>
           {({ errors, touched }) => (
             <Form className="flex flex-col  gap-3 w-full">
               <h1 className=" text-black font-bold  text-3xl">Редактирвоание Тэга</h1>
@@ -199,7 +194,10 @@ export const Tags = () => {
                       name={item.title}
                       id={item.id}
                       edit={EditElementPopup}
-                      deleteEl={deleteElement}
+                      deleteEl={()=>{
+                        dispatch(deleteTagById( bearerToken,item.id))
+                        dispatch(tagsSlice.actions.tagsDeleteById(item.id))
+                      }}
                     />
                   ))}
                 </tbody>

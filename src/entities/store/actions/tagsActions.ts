@@ -19,7 +19,7 @@ export const getTags = (token:string) =>async (dispatch :AppDispatch)=>{
         dispatch(tagsSlice.actions.tagsFetchingErrorr(e.message))
     }
 }
-export const deleteTagById = (token:string, id:string) =>(dispatch: AppDispatch)=>{
+export const deleteTagById = (token:string, id:number) =>(dispatch: AppDispatch)=>{
     try{
         dispatch(tagsSlice.actions.tagsFetching())
         const responce =  fetchData(`/tags/${id}`,{

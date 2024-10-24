@@ -48,7 +48,7 @@ export const tagsSlice = createSlice({
             state.isLoading=false;
             state.error= action.payload
         },
-        tagsDeleteById(state,action:PayloadAction<string>){
+        tagsDeleteById(state,action:PayloadAction<number>){
             state.isLoading=false;
             state.data.data = state.data.data.filter((elem)=>elem.id !== Number(action.payload))
         },
