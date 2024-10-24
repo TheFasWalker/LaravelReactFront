@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import { PreviewPost } from "../../shared/admin/posts/PreviewPost"
 import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux"
 import { BlueButton } from "../../shared/ui/elements/BlueBurron"
@@ -18,9 +18,13 @@ export const Posts = () => {
   const searchField = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchData(event.target.value);
 };
-const handleBlur = () => {
-  console.log(searchData);
+const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+  formSubmit(event)
 };
+const formSubmit = (event: FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  console.log(searchData);
+}
   useEffect(() => {
     dispatch(getPosts(bearerToken, sortingType))
     console.log(data)
@@ -35,7 +39,7 @@ const handleBlur = () => {
         <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
             <div className="w-full md:w-1/2">
-              <form className="flex items-center">
+              <form className="flex items-center" onSubmit={formSubmit}>
                 <div className="relative w-full">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg
