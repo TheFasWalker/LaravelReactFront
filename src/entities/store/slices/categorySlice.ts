@@ -48,9 +48,9 @@ export const categorySlice = createSlice({
             state.isLoading = false;
             state.error = action.payload
         },
-        categoriesDeleteById(state, action: PayloadAction<string>) {
+        categoriesDeleteById(state, action: PayloadAction<number>) {
             state.isLoading = false;
-            state.data.data.filter((elem) => elem.id !== Number(action.payload));
+            state.data.data = state.data.data.filter((elem) => elem.id !== Number(action.payload));
         },
         categoriesCreate(state, action: PayloadAction<Category>) {
             state.isLoading = false;

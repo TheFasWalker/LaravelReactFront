@@ -18,7 +18,7 @@ export const getCategories = (token:string)=> async (dispatch: AppDispatch)=>{
         dispatch(categorySlice.actions.categiriesFetchingError(e.message))
     }
 }
-export const deleteCategoryById = (token: string, id: string) => async(dispatch: AppDispatch) => {
+export const deleteCategoryById = (token: string, id: number) => async(dispatch: AppDispatch) => {
     try {
         dispatch(categorySlice.actions.categoriesFetching());
         const responce = fetchData(`/category/${id}`, {

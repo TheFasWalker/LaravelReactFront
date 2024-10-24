@@ -4,10 +4,11 @@ import { BlueButton } from "../../shared/ui/elements/BlueBurron"
 import { PopupLayout } from "../../shared/ui/layout/PopupLayout"
 import { useAppDispatch, useAppSelector } from "../../shared/hooks/redux"
 import { Loader } from "../../shared/ui/elements/Loader"
-import { getCategories } from "../../entities/store/actions/categoriesAction"
+import { createCategoty, deleteCategoryById, getCategories } from "../../entities/store/actions/categoriesAction"
 import { Pagination } from "../../shared/admin/HOC/pagination"
 import { Category } from "../../entities/types/categories"
 import { Field, Form, Formik } from "formik"
+import { categorySlice } from "../../entities/store/slices/categorySlice"
 
 export const Categories = () => {
   const dispatch = useAppDispatch()
@@ -31,11 +32,17 @@ export const Categories = () => {
     console.log('editing =' , dataId)
 
   }
-  const deleteElement =(e: React.MouseEvent<HTMLDivElement>)=>{
-    const dataId = e.currentTarget.getAttribute('data-id');
-    console.log(dataId)
-    console.log('dekete =' , dataId)
+  // const deleteElement =(e: React.MouseEvent<HTMLDivElement>)=>{
+  //   const dataId = e.currentTarget.getAttribute('data-id');
 
+  //   dispatch(deleteCategoryById(bearerToken,dataId))
+  //   dispatch(categorySlice.actions.categoriesDeleteById(dataId))
+  //   console.log('deдete =' , dataId)
+
+  // }
+  const createCategoryFunc=(title:string, token:string)=>{
+    dispatch(createCategoty(token, title));
+    // dispatch(categorySlice.actions.categoriesCreate())
   }
   useEffect(()=>{
 
@@ -181,7 +188,11 @@ return(
               name={elem.title}
                 id={elem.id}
                 edit={editElement}
-                deleteEl={deleteElement}
+                deleteEl={()=>{
+                  dispatch(deleteCategoryById(bearerToken, elem.id))
+                  dispatch(categorySlice.actions.categoriesDeleteById(elem.id))
+                  console.log(data)
+                }}
               />
             ))}
 
