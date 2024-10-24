@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Iposts } from "../../types/posts";
 
 type postData= {
@@ -37,7 +37,20 @@ const initialState:postData ={
 export const postsSlice = createSlice({
     name:'posts',
     initialState,
-    reducers:{}
+    reducers:{
+        postFetching(state){
+                state.isLoading = true
+        },
+        postFetchingError(state,action:PayloadAction<string>){
+            state.isLoading = false,
+            state.error = action.payload
+        },
+        postFetchingSucsess(state,action:PayloadAction<Iposts>){
+            state.isLoading = false;
+            state.error = '';
+            state.data = action.payload;
+        }
+    }
 
 })
 

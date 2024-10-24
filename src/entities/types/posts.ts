@@ -40,3 +40,7 @@ export interface Iposts {
     active: boolean
   }
   
+
+  export interface iPost {
+    
+  }
