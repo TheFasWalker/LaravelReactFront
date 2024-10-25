@@ -6,8 +6,10 @@ import { Loader } from "../../shared/ui/elements/Loader"
 import { DropDownCheckboxes } from "../../shared/ui/form/DropDownCheckboxes"
 import { getPosts } from "../../entities/store/actions/postAction"
 import { Pagination } from "../../shared/admin/HOC/pagination"
+import { Navigate, useNavigate } from "react-router-dom"
 
 export const Posts = () => {
+  const navigate = useNavigate();
   const bearerToken = useAppSelector((state) => state.authReduser.token);
   const dispatch = useAppDispatch();
   const { isLoading, data, error } = useAppSelector((state) => state.postReduser);
@@ -126,7 +128,11 @@ const formSubmit = (event: FormEvent<HTMLFormElement>) => {
                 )}
               </div>
 
-              <BlueButton title="+ Add Item" />
+              <BlueButton
+              onClick={()=>{
+                navigate('create'); 
+              }}
+               title="+ Add Item" />
 
 
 

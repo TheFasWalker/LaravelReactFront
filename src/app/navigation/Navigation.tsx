@@ -11,6 +11,7 @@ import { Users } from "../../pages/Admin/Users"
 import { ErrorPage } from "../../pages/ErroPage"
 import { AdminLayout } from "../../shared/ui/layout/AdminLayout"
 import { ProtectedRoute } from "./ProtectedRoute"
+import { PostCreate } from "../../pages/Admin/PostCreate"
 
 export const Navigation: FC = () => {
     return (
@@ -24,7 +25,10 @@ export const Navigation: FC = () => {
                 <Route element={<ProtectedRoute/>}>
                     <Route path='/data' element={<AdminLayout />}>
                         <Route index element={<AdminHomePage />} />
-                        <Route path='posts' element={<Posts />} />
+                        <Route path='posts'  >
+                            <Route index element={<Posts />}/>
+                            <Route path='create' element={<PostCreate/>}/>
+                        </Route>
                         <Route path='categories' element={<Categories />} />
                         <Route path='tags' element={<Tags />} />
                         <Route path='firms' element={<Firms />} />
