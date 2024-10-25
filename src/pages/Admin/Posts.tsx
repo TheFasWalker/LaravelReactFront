@@ -11,15 +11,32 @@ export const Posts = () => {
   const bearerToken = useAppSelector((state) => state.authReduser.token);
   const dispatch = useAppDispatch();
   const { isLoading, data, error } = useAppSelector((state) => state.postReduser);
-  const [sortingType, setSortyngType] = useState('')
   const [sortingText , setSortingText]= useState('All')
   const [sortingDropDown, setsortingDropDown] = useState(false)
   const [searchData, setSearchData] = useState('')
+  const [sortingType, setSortyngType] = useState('')
+  const [queryData, setQueryData] = useState('');
+
+  const composingSearchData =()=>{
+    const type = sortingType
+    const field = `title=${searchData}`
+    if(searchData && sortingType){
+      setQueryData(`${field}&${type}`)
+    }else if (!type){
+
+      setQueryData(field)
+    }else{
+      setQueryData(type)
+    }
+
+  }
+
   const searchField = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchData(event.target.value);
 };
 const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
   formSubmit(event)
+  composingSearchData()
 };
 const formSubmit = (event: FormEvent<HTMLFormElement>) => {
   event.preventDefault();
@@ -28,7 +45,7 @@ const formSubmit = (event: FormEvent<HTMLFormElement>) => {
   useEffect(() => {
     dispatch(getPosts(bearerToken, sortingType))
     console.log(data)
-  }, [sortingType])
+  }, [queryData])
   return (
     <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
       Список постов
@@ -79,6 +96,7 @@ const formSubmit = (event: FormEvent<HTMLFormElement>) => {
                           setSortyngType('is_published=1')
                           setSortingText('published')
                           setsortingDropDown(false)
+                          composingSearchData()
                         }}
                       >published</button>
                     )}
@@ -89,6 +107,7 @@ const formSubmit = (event: FormEvent<HTMLFormElement>) => {
                           setSortyngType('is_published=0')
                           setSortingText('not published')
                           setsortingDropDown(false)
+                          composingSearchData()
                         }}
                       >not published</button>
                     )}
@@ -99,6 +118,7 @@ const formSubmit = (event: FormEvent<HTMLFormElement>) => {
                           setSortyngType('')
                           setSortingText('All')
                           setsortingDropDown(false)
+                          composingSearchData()
                         }}
                       >all</button>
                     )}
